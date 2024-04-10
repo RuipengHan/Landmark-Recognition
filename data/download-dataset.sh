@@ -49,10 +49,20 @@ download_check_and_extract() {
     echo "MD5 checksum for $images_file_name did not match checksum in $images_md5_file_name"
   fi
 }
-
 for i in $(seq 0 $NUM_PROC $N); do
   upper=$(expr $i + $NUM_PROC - 1)
-  limit=$(($upper>$N?$N:$upper))
+  if [ $upper -gt $N ]; then
+    limit=$N
+  else
+    limit=$upper
+  fi
   for j in $(seq -f "%03g" $i $limit); do download_check_and_extract "$j" & done
   wait
 done
+
+# for i in $(seq 0 $NUM_PROC $N); do
+#   upper=$(expr $i + $NUM_PROC - 1)
+#   limit=$(($upper>$N?$N:$upper))
+#   for j in $(seq -f "%03g" $i $limit); do download_check_and_extract "$j" & done
+#   wait
+# done
