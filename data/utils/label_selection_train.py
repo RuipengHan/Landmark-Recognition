@@ -4,7 +4,7 @@ import shutil
 import glob
 
 
-def select_train_labels(n=5, full_csv_path="", downloaded_train=""):
+def select_train_labels(n=50, full_csv_path="", downloaded_train=""):
     # TODO: When train data is downloaded, we need to get list of ids downloaded
     downloaded_img_ids = []
     for file_path in glob.glob(downloaded_train + '/*.jpg'):
@@ -35,7 +35,7 @@ def select_train_labels(n=5, full_csv_path="", downloaded_train=""):
 """
     Moves selected training images from the src_data_path to dest_data_path
 """
-def gather_train_data(train_data="", src_data_path="", dest_data_path=""):
+def gather_train_data(selected_train_data="", src_data_path="", dest_data_path=""):
     if not os.path.exists(dest_data_path):
         os.makedirs(dest_data_path)
     
@@ -43,7 +43,7 @@ def gather_train_data(train_data="", src_data_path="", dest_data_path=""):
     image_file_paths = []
     
     # Gets list of img ids (names)
-    train_data = pd.read_csv(train_data)
+    train_data = pd.read_csv(selected_train_data)
     image_ids = set(train_data["id"].tolist())
 
     for root, dirs, files in os.walk(src_data_path):
@@ -93,8 +93,12 @@ def info_downloaded_train_data(full_csv_path="", downloaded_train=""):
 
 
 def main():
-    gather_train_data(src_data_path="/Users/ruipenghan/Desktop/Academics/11. SP 2024/CS 444/project/test", dest_data_path="out")
-    # select_train_labels(n=5, csv_path="../labels/train.csv")
+
+    # info_downloaded_train_data(full_csv_path="", downloaded_train="")
+
+    # select_train_labels(n=50, full_csv_path="../labels/train.csv", downloaded_train="")
+    
+    # gather_train_data(selected_train_data="", src_data_path="/Users/ruipenghan/Desktop/Academics/11. SP 2024/CS 444/project/test", dest_data_path="out")
 
 if __name__ == '__main__':
     main()
