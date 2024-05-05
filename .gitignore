@@ -32,3 +32,5 @@ __pycache__/
 
 # Ignore the entire virtual environment folder
 /.venv/
+
+small_data/*
