@@ -34,3 +34,4 @@ __pycache__/
 /.venv/
 
 small_data/*
+models/baselines/saved_models/efficient_net_b7_best_model.pth
