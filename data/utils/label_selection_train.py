@@ -63,9 +63,12 @@ def gather_train_data(selected_train_data="", src_data_path="", dest_data_path="
 
 def info_downloaded_train_data(full_csv_path="", downloaded_train=""):
     downloaded_img_ids = []
-    for file_path in glob.glob(downloaded_train + '/*.jpg'):
-        file_name = os.path.basename(file_path)
-        downloaded_img_ids.append(os.path.splitext(file_name)[0])
+    
+    for root, dirs, files in os.walk(downloaded_train):
+        for file in files:
+            if file.lower().endswith('.jpg'):
+                file_name = os.path.splitext(file)[0]
+                downloaded_img_ids.append(file_name)
 
     full_train_data = pd.read_csv(full_csv_path)
 

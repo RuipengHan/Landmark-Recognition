@@ -33,5 +33,6 @@ __pycache__/
 # Ignore the entire virtual environment folder
 /.venv/
 
-small_data/*
+data/small_data/*
 models/baselines/saved_models/efficient_net_b7_best_model.pth
+
